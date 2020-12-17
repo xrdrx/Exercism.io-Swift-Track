@@ -10,11 +10,7 @@ class GradeSchool {
     }
     
     func addStudent(_ name: String, grade: Int) {
-        if _roster[grade] != nil {
-            _roster[grade]?.append(name)
-        } else {
-            _roster[grade] = [name]
-        }
+        _roster[grade, default: []].append(name)
     }
     
     func studentsInGrade(_ grade: Int) -> [String] {
