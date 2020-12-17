@@ -11,11 +11,6 @@ class Year {
     }
     
     private func yearIsLeapYear() -> Bool {
-        return yearIsDivisibleBy(4) && (!yearIsDivisibleBy(100) || yearIsDivisibleBy(400))
-    }
-    
-    private func yearIsDivisibleBy(_ number: Int) -> Bool {
-        return year % number == 0
+        return year.isMultiple(of: 4) && (!year.isMultiple(of: 100) || year.isMultiple(of: 400))
     }
 }
-
