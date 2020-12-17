@@ -15,26 +15,20 @@ class BinarySearch<T: Comparable> {
     
     func searchFor(_ item: T) -> Int? {
         guard !list.isEmpty else { return nil }
-        
-        var items = list
-        var result = middle
-        var index = middle
-        
-        while !items.isEmpty {
-            if items[index] == item { return result }
+
+        var lower = 0
+        var higher = list.count
+        var middle = list.count / 2
+
+        while higher > lower {
+            middle = lower + (higher - lower) / 2
             
-            if items[index] > item {
-                items = Array(items.prefix(index))
-                index = items.count / 2
-                result -= (items.count - index)
-                continue
-            }
-            
-            if items[index] < item {
-                items = Array(items.suffix(items.count - index - 1))
-                index = items.count / 2
-                result += index + 1
-                continue
+            if item == list[middle] {
+                return middle
+            } else if item < list[middle] {
+                higher = middle
+            } else {
+                lower = middle + 1
             }
         }
         return nil
