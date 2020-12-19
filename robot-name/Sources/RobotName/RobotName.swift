@@ -3,24 +3,27 @@ import Foundation
 
 struct Robot {
     private let storage: UniqueNamesStorage
+    private let alphabet: [String]
     
     private(set) var name: String
     
     init(nameStorage: UniqueNamesStorage = UniqueNamesStorage.shared) {
-        self.name = ""
         self.storage = nameStorage
+        self.alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { $0.description }
+        self.name = ""
         resetName()
     }
     
     mutating func resetName() {
-        let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".flatMap { $0.description }
         let old = name
-        name = ""
+        
         repeat {
+            name = ""
             name.append(alphabet.randomElement()!)
             name.append(alphabet.randomElement()!)
             name.append(String(format: "%03d", Int.random(in: 0...999)))
         } while storage.contains(name: name)
+        
         storage.add(name: name)
         storage.remove(name: old)
     }
