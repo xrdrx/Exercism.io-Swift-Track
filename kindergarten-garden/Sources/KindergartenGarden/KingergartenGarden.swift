@@ -1,9 +1,8 @@
 //Solution goes in Sources
-import Foundation
-
 class Garden {
     private let plants: String
     private let children: [String]
+    private let plantsPerRowPerChild: Int
     
     private lazy var sortedPlants: [Int: [String]] = {
         sortPlantsByNumber()
@@ -12,9 +11,10 @@ class Garden {
         enumerateChildren()
     }()
     
-    init(_ plants: String, children: [String] = Children.all) {
+    init(_ plants: String, children: [String] = Children.all, plantsPerRowPerChild: Int = 2) {
         self.plants = plants
         self.children = children
+        self.plantsPerRowPerChild = plantsPerRowPerChild
     }
     
     func plantsForChild(_ name: String) -> [Plants] {
@@ -27,9 +27,9 @@ class Garden {
     private func sortPlantsByNumber() -> [Int: [String]] {
         var dict: [Int: [String]] = [:]
         
-        plants.components(separatedBy: "\n").forEach { plants in
+        plants.split(separator: "\n").forEach { plants in
             for (index, plant) in plants.enumerated() {
-                dict[index / 2, default: []].append(String(plant))
+                dict[index / plantsPerRowPerChild, default: []].append(String(plant))
             }
         }
         
