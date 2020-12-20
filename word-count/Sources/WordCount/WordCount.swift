@@ -7,21 +7,10 @@ struct WordCount {
     }
     
     func count() -> [String: Int] {
-        var dict: [String: Int] = [:]
-        var currentWord: String = ""
-        
-        for symbol in words {
-            if symbol.isLetter || symbol.isNumber {
-                currentWord += String(symbol)
-            } else if !currentWord.isEmpty {
-                dict[currentWord.lowercased(), default: 0] += 1
-                currentWord = ""
+        return words
+            .split { !$0.isLetter && !$0.isNumber }
+            .reduce(into: [:]) { count, word in
+                count[String(word).lowercased(), default: 0] += 1
             }
-        }
-        if !currentWord.isEmpty {
-            dict[currentWord.lowercased(), default: 0] += 1
-        }
-        
-        return dict
     }
 }
