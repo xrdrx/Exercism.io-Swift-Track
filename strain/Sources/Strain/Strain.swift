@@ -2,17 +2,13 @@
 extension Collection {
     func keep(_ function: (Element) -> Bool) -> [Element] {
         var result: [Element] = []
-        for value in self {
-            if function(value) { result.append(value) }
+        for value in self where function(value) {
+            result.append(value)
         }
         return result
     }
     
     func discard(_ function: (Element) -> Bool) -> [Element] {
-        var result: [Element] = []
-        for value in self {
-            if !function(value) { result.append(value) }
-        }
-        return result
+        return keep { !function($0) }
     }
 }
