@@ -1,15 +1,15 @@
 //Solution goes in Sources
 func classifier(listOne: [Int], listTwo: [Int]) -> ListRelation {
-    if listOne.count == listTwo.count {
-        return listOne == listTwo ? .equal : .unequal
+    if listOne == listTwo { return .equal }
+    if listOne.count < listTwo.count &&
+        check(listOne, isSublistOf: listTwo) {
+        return .sublist
     }
-    
-    switch (listOne.count < listTwo.count) {
-    case true:
-        return check(listOne, isSublistOf: listTwo) ? .sublist : .unequal
-    case false:
-        return check(listTwo, isSublistOf: listOne) ? .superlist : .unequal
+    if listOne.count > listTwo.count &&
+        check(listTwo, isSublistOf: listOne) {
+        return .superlist
     }
+    return .unequal
 }
 
 func check(_ listOne: [Int], isSublistOf listTwo: [Int]) -> Bool {
