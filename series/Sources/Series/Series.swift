@@ -12,6 +12,7 @@ struct Series {
     
     private func getValues(_ length: Int, _ line: String) -> [[Int]] {
         if line.count < length { return [[]] }
-        return [line.prefix(length).compactMap { Int(String($0)) }] + getValues(length, String(line.dropFirst()))
+        return [line.prefix(length).compactMap { Int(String($0)) }] +
+            getValues(length, String(line.dropFirst()))
     }
 }
