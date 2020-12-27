@@ -12,10 +12,10 @@ struct Base {
         }
         var output: [Int] = []
         while result > 0 {
-            output = [result % outputBase] + output
+            output.append(result % outputBase)
             result /= outputBase
         }
-        return output
+        return output.reversed()
     }
 }
 
