@@ -2,11 +2,13 @@
 struct Prime {
     static func nth(_ n: Int) -> Int? {
         guard n > 0 else { return nil }
+        if n == 1 { return 2 }
+        if n == 2 { return 3 }
 
-        var counter = 0
-        var currentNumber = 0
+        var counter = 2
+        var currentNumber = 3
         while counter < n {
-            currentNumber += 1
+            currentNumber += 2
             if isPrime(currentNumber) {
                 counter += 1
             }
