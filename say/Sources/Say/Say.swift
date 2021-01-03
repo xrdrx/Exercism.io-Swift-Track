@@ -60,11 +60,9 @@ struct NumberConverter {
     }
     
     private static func convertOneTwoDigitNumber(_ number: Int) -> String {
+        guard number >= 0 && number < 100 else { return "Error converting" }
         if let result = dictionary[number] { return result }
-        let hundred = number % 100
-        let lastDigit = dictionary[hundred % 10]!
-        let firstDigit = dictionary[hundred - (hundred % 10)]!
-        return "\(firstDigit)-\(lastDigit)"
+        return "\(dictionary[number / 10 * 10]!)-\(dictionary[number % 10]!)"
     }
     
     private static func getDevider(for number: Int) -> Int {
