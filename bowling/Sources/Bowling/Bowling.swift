@@ -1,7 +1,6 @@
 //Solution goes in Sources
 struct Bowling {
     private var frames: [Frame]
-    private var pinsAvailable: Int = 10
     
     init() {
         self.frames = [Frame()]
