@@ -51,7 +51,7 @@ class Frame {
         guard pinsLeft >= pins else { throw Bowling.BowlingError.tooManyPinsInFrame }
         
         switch (pins, status) {
-        case (pinsLeft, .opened) : //strike or spare
+        case (pinsLeft, .opened): //strike or spare
             pinsLeft = 10
             status = .bonus
         case (pinsLeft, .bonus):
